@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Images</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="../js/canvasjs.min.js"></script>
+        <script type="text/javascript" src="LGraphes2.js"></script>
+    </head>
+    
+    <body>
+        affichage de trame 1
+        <div>
+            <div id="divChartX" style="height: 150px; width:100%;"> </div>
+            <div id="divChartY" style="height: 150px; width:100%;"> </div>
+            <div id="divChartZ" style="height: 150px; width:100%;"> </div>
+        </div>
+        <button onclick="clic()">Click me</button>
+        <script>
+            function clic() {
+                var trame = faireTrame(50);
+                g_updateDonnees(trame);
+            }
+        </script>
+    </body>
+</html>

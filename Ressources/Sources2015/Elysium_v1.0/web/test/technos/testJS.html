@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Test de fonction JS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script>
+            function g_pad(num) {
+                var s = "0000";
+                if (num < 0) {
+                    s += -num;
+                    return '-' + s.substr(s.length - 4);
+                }
+                else {
+                    s += num;
+                    return '+' + s.substr(s.length - 4);
+                }
+            }
+        </script>
+        <div>Test de fonction JS</div>
+        <script>
+            document.write(g_pad(1));
+        </script> 
+        <br/>
+        <script>
+            document.write(g_pad(-12));
+        </script> 
+        <br/>
+        <script>
+            document.write(g_pad(993));
+        </script>
+        <br/>
+        <script>
+            document.write(g_pad(-1234));
+        </script>
+        <br/>
+        <script>
+            document.write(g_pad(0));
+        </script>
+        <br/>
+    </body>
+</html>

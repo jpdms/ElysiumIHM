@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Insight</title>   
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/jquery.mobile-1.4.5.css">
+        <link rel="stylesheet" href="../themes/elysiumThemeV3.min.css" />
+        <link rel="stylesheet" href="../css/elysium.css">
+        <script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.mobile-1.4.5.js"></script>
+        <script type="text/javascript" src="../js/canvasjs.min.js"></script>
+        <script type="text/javascript" src="../js/CBatterie.js"></script>
+        <script type="text/javascript" src="../js/CIhm.js"></script>
+        <script type="text/javascript" src="../js/LGraphes.js"></script>
+        <script type="text/javascript" src="../js/LCommandes.js"></script>
+        <script type="text/javascript" src="../js/LStream.js"></script>
+        <script type="text/javascript" src="../js/LMultiLangue.js"></script>
+        <!-- A mettre en dernier -->
+        <script type="text/javascript" src="elysiumTest.js"></script>
+    </head>
+
+    <body>
+<!--
+    ======================================
+                header global
+    ======================================
+--> 
+    <div data-role="header" data-position="fixed" data-fullscreen="false" data-theme="a">
+        <div>
+            <img id="imgNasa" src="../images/nasaJPL.png" alt="nasa" />
+            <img id="imgCnes" src="../images/cnes.png" alt="cnes" />
+            <img id="imgInsight" src="../images/insight.png" alt="insight" />
+            <label id="lblTitre">ELYSIUM</label>
+            <label id="lblSousTitre" st></label>
+            <img id="imgElysium" src="../images/elysium.png" alt="elysium" />
+            <img id="imgAcToulouse" src="../images/acToulouse.png" alt="acToulouse" />
+            <img id="imgEnCours" src="../images/enCours.gif" alt="enCours"/>
+            <img id="imgLangue" src="../images/drapeau_fr.png" alt="fr" />
+        </div>
+    </div>
+
+<!--
+    ======================================
+                footer global
+    ======================================
+--> 
+    <div data-role="footer" data-position="fixed" data-fullscreen="false" data-theme="a">
+        <div>
+            <label id="msgInfo" st="0"></label>
+        </div>
+    </div>
+<!--
+    ======================================
+                page 2 des tests
+    ======================================
+--> 
+    <div data-role="page" id="page2">
+        <div data-role="main" class="ui-content">
+            <br/>
+            <h1 id="lblMain_P2" st class="centrer"></h1>
+            <table id="tableTest_P2" data-role="table"
+                        class="ui-body-a ui-shadow table-stripe ui-responsive">
+                <thead>
+                    <tr class="ui-bar-a">
+                        <th id="tabMsg_P2" st></th>
+                        <th id="tabResultat_P2" st></th>
+                    </tr>
+                </thead>
+                <tbody id="tbdTest_P2">
+                    <!-- on ajoute ici les comptes rendus de tests -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+<!--
+    ======================================
+            page 3 des initialisations
+    ======================================
+--> 
+    <div data-role="page" id="page3">
+        <div data-role="main" class="ui-content">
+            <br/>
+            <h1 id="lblMain_P3" st class="centrer"></h1>
+            <table id="tableInit_P3" data-role="table"
+                        class="ui-body-a ui-shadow table-stripe ui-responsive">
+                <thead>
+                    <tr class="ui-bar-a">
+                        <th id="tabMsg_P3" st></th>
+                        <th id="tabResultat_P3" st></th>
+                    </tr>
+                </thead>
+                <tbody id="tbdInit_P3">
+                    <!-- on ajoute ici les comptes rendus d'init -->
+                </tbody>
+            </table>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <button id="btnTest1" class="ui-btn ui-btn-b btnCmd">test1</button>
+            <button id="btnTest2" class="ui-btn ui-btn-b btnCmd">test2</button>
+            <button id="btnTest3" class="ui-btn ui-btn-b btnCmd">test3</button>
+            <img id="btnARU_P3" src="images/aru.png" alt="btnARU" />
+            <label id="lblARU_P3" st></label>
+        </div>
+    </div>
+
+<!--
+    ======================================
+            page 4 principale
+    ======================================
+--> 
+    <div data-role="page" id="page4">
+        <div role="main" class="ui-content">
+            <div class="ui-etat" id="main-etat">
+                <label id="lblPanneau1" st></label>
+                <label id="msgPanneau1" st="0"></label>
+                <label id="lblPanneau2" st></label>
+                <label id="msgPanneau2" st="0"></label>
+                <label id="lblSEIS" st></label>
+                <label id="msgSEIS" st="0"></label>
+                <label id="lblHP3" st></label>
+                <label id="msgHP3" st="0"></label>
+                <label id="lblWTS" st></label>
+                <label id="msgWTS" st="0"></label>
+                <label id="lblBras" st></label>
+                <label id="msgBras" st="0"></label>
+                <div id="divBatterie">
+                    <img id="imgBatterie" src="../images/batterie.png" alt="batterie" />
+                    <div id="divBatterieFond"></div>
+                    <div id="divBatterieCharge"></div>
+                    <label id="lblBatterie"></label>
+                </div>
+            </div>
+
+            <div id="main-visu">
+                <img id="imgCamera" src="" alt="video"/>
+                <div id="divGraphe" class="show">
+                    <div id="div3Graphes" class="show">
+                        <div id="divChartX" style="height: 150px; width:90%;"> </div>
+                        <div id="divChartY" style="height: 150px; width:90%;"> </div>
+                        <div id="divChartZ" style="height: 150px; width:90%;"> </div>
+                        <label id="lblX">X</label>
+                        <label id="lblY">Y</label>
+                        <label id="lblZ">Z</label>
+                    </div>
+                    <div id="divGrapheXYZ" class="hide">
+                        <div id="divChartXYZ" style="height: 450px; width:100%;"> </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ui-commandes" >
+                <button id="btnPanneaux" st="0" class="ui-btn ui-btn-b btnCmd"></button>
+                <button id="btnHP3" st="0" class="ui-btn ui-btn-b btnCmd"></button>
+                <button id="btnSEIS" st="0" class="ui-btn ui-btn-b btnCmd" ></button>
+                <button id="btnWTS" st="0" class="ui-btn ui-btn-b btnCmd"></button>
+                <img id="btnARU" src="../images/aru.png" alt="btnARU" />
+                <label id="lblARU" st></label>
+                <button id="btnQuitter" st="0" class="ui-btn ui-btn-b btnCmd"></button>
+            </div>
+        </div>
+    </div>
+
+<!--
+    ======================================
+            page 5 de cloture
+    ======================================
+-->   
+    <div data-role="page" id="page5">
+        <div data-role="main" class="ui-content">
+            <br/><br/><br/><br/>
+            <h1 id="lblMain_P5" st class="centrer"></h1>
+            <button id="btnMain_P5" st class="ui-btn ui-btn-b"></button>
+            <img id="btnARU_P5" src="../images/aru.png" alt="btnARU" />
+            <label id="lblARU_P5" st></label>
+        </div>
+    </div>
+    
+<!--
+    ======================================
+     popup globales avec ouverture modale
+    ======================================
+-->
+    <div id="popDecision" data-role="popup" data-dismissible="false" 
+                                        data-theme="a" data-overlay-theme="a">
+        <h1 id="msgPopDecision" st="0" class="centrer"></h1><br/>
+        <fieldset class="ui-grid-a">
+            <div class="ui-block-a">
+                <button id="btnPopDecisionOK" st class="ui-btn ui-btn-b" ></button>
+            </div>
+            <div class="ui-block-b">
+                <button id="btnPopDecisionNO" st class="ui-btn ui-btn-b" ></button>
+            </div>
+        </fieldset>
+    </div>
+    
+    <div id="popConfirm" data-role="popup" data-dismissible="false" 
+                                        data-theme="a" data-overlay-theme="a">
+        <h1 id="msgPopConfirm" st="0" class="centrer"></h1><br/>
+        <button id="btnPopConfirm" st class="ui-btn ui-btn-b center-btn" ></button>
+        <br/>
+    </div>
+    
+    <div id="popARU" data-role="popup" data-dismissible="false" 
+                                        data-theme="c" data-overlay-theme="c"> 
+        <h1 id="msgPopARU" st="0" class="centrer"></h1><br/>
+        <div id="txtPopARU" st="0" class="centrer"></div><br/>
+        <button id="btnPopAruOK" st class="ui-btn ui-btn-d center-btn" ></button>
+        <br/>
+    </div>
+    
+
+<!--
+    ==========================================
+     popup globales avec ouverture non modale
+    ==========================================
+-->    
+    <div id="popLangue" data-role="popup" data-theme="a">
+        <h1 id="msgPopLangue" st class="centrer"></h1><br/>
+        <fieldset class="ui-grid-a">
+            <div class="ui-block-a">
+                <button id="btnPopFrancais" class="ui-btn ui-btn-b" >Français</button>
+            </div>
+            <div class="ui-block-b">
+                <button id="btnPopAnglais" class="ui-btn ui-btn-b" >English</button>
+            </div>
+        </fieldset>
+    </div>
+    
+    <div id="popNasa" data-role="popup" data-theme="a">
+        <div class="centrer">
+            <h1 id="msgPopNasa" st></h1><br/>
+            NASA JPL<br/>
+            Etc.<br/>
+        </div>
+    </div>
+
+    <div id="popCnes" data-role="popup" data-theme="a">
+        <div class="centrer">
+            <h1 id="msgPopCnes" st></h1><br/>
+            CNES<br/>
+            Etc.<br/>
+        </div>
+    </div>
+
+    <div id="popInsight" data-role="popup" data-theme="a">
+        <div class="centrer">
+            <h1 id="msgPopInsight" st></h1><br/>
+            Insight<br/>
+            Etc.<br/>
+        </div>
+    </div>
+
+    <div id="popElysium" data-role="popup" data-theme="a">
+        <div class="centrer">
+            <h1 id="msgPopElysium" st></h1><br/>
+            Elysium V0.1<br/>
+            Etc.<br/>
+        </div>
+    </div>
+
+    <div id="popAcToulouse" data-role="popup" data-theme="a">
+        <div class="centrer">
+        <h1 id="msgPopAcToulouse" st>Remerciements</h1><br/>
+            Lycée V.Hugo Colomiers BTS IRIS<br/>
+            Lycée V.Hugo Colomiers BTS CRSA<br/>
+            Etc.<br/>
+        </div>
+    </div>
+
+<!--
+    ==========================================
+     popup globales avec ouverture non modale
+      mais réservés à la page 4 (principale)
+    ==========================================
+-->
+    <div id="popVideo" data-role="popup" data-position-to="#imgCamera" data-theme="a">
+        <button id="btnPopVideoShowGraphe" st="0" class="ui-btn ui-btn-b" ></button>
+    </div>
+
+    <div id="popGraphes" data-role="popup" data-position-to="#divGraphe" data-theme="a">
+        <button id="btnPopShowGraphe" st="0" class="ui-btn ui-btn-b" ></button>
+        <button id="btnPopChangeVue" st class="ui-btn ui-btn-b" ></button>
+        <button id="btnPopGrapheReset" st class="ui-btn ui-btn-b" ></button>
+        <button id="btnPopGrapheStart" st="0" class="ui-btn ui-btn-b" ></button>
+    </div>
+
+    <div id="popCommande" data-role="popup" data-theme="a">
+        <h1 id="msgPopCommande" st="1" class="centrer"></h1><br/>
+        <fieldset class="ui-grid-a">
+            <div class="ui-block-a">
+                <button id="btnPopCommandeOK" st class="ui-btn ui-btn-b" ></button>
+            </div>
+            <div class="ui-block-b">
+                <button id="btnPopCommandeNO" st class="ui-btn ui-btn-b" ></button>
+            </div>
+        </fieldset>
+    </div>
+
+    <div id="popBatterie" data-role="popup" data-theme="a">
+        <div class="centrer">
+        <h1 id="msgPopBatterie" st></h1><br/>
+        <span id="lblTensionBatteries" st></span>
+        <span id="lblValeurTensionBatteries"></span>V<br/>
+        <span id="lblChargeBatteries" st></span>
+        <span id="lblValeurChargeBatteries"></span>%<br/>
+        <span id="lblCourantBatteries" st></span>
+        <span id="lblValeurCourantBatteries"></span>A<br/>
+        <span id="lblChargeConsommees" st></span>
+        <span id="lblValeurChargeConsommees"></span>%<br/>
+        <span id="lblDureeRestanteBatteries" st></span>
+        <span id="lblValeurDureeRestanteBatteries"></span><br/>
+        <span id="lblCodeIncidentEnergie" st></span>
+        <span id="lblValeurCodeIncidentEnergie"></span><br/><br/>
+        </div>
+    </div>
+
+    </body>
+</html>
